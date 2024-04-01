@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
+model Users{
   id String @db.ObjectId @default(auto()) @map("_id") @id
   email String
   hashedPassword String
@@ -18,3 +18,24 @@ model User{
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+
+model Url {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  originalUrl String
+  shortUrl    String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String   @db.ObjectId
+  createdAt   DateTime @default(now())
+  clicks      Int
+
+  @@unique([userId, originalUrl])
+  @@map("urls")
+}
+
+model User {
+  id    String  @id @default(auto()) @map("_id") @db.ObjectId
+  email String  @unique
+  urls  Url[]
+}
+
