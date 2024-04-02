@@ -9,6 +9,7 @@ import linking from "@/public/assets/vectors/link.svg";
 import Toggler from "@/components/Toggler";
 import Table from "@/components/Table";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 export default function TrialPage() {
   const handleSignOut = async () => {
@@ -60,7 +61,8 @@ export default function TrialPage() {
       <div className="text-white text-center py-12 font-extralight">
         You can create{" "}
         <span style={{ color: "#eb568e", fontWeight: "bold" }}>05</span> more
-        links. Register Now to enjoy Unlimited usage
+        links. <Link href={"/editPage"}>Register Now</Link> to enjoy Unlimited
+        usage
       </div>
       <div className="   w-[1250px] px-12 py-1">
         <table className=" sm:w-[350px] md:w-full font-light text-sm h-[60px]  text-left rtl:text-right border rounded-[10px] bg-[#181e29] border-[#181e29] sm:flex-wrap ">

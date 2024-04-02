@@ -20,22 +20,10 @@ model Users{
 }
 
 
-model Url {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  originalUrl String
-  shortUrl    String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId      String   @db.ObjectId
-  createdAt   DateTime @default(now())
-  clicks      Int
+model Link {
+  id String @db.ObjectId @default(auto()) @map("_id") @id
+  linkUrl String
+  linkId String
 
-  @@unique([userId, originalUrl])
-  @@map("urls")
-}
-
-model User {
-  id    String  @id @default(auto()) @map("_id") @db.ObjectId
-  email String  @unique
-  urls  Url[]
 }
 

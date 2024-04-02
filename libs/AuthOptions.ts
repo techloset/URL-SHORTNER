@@ -13,7 +13,7 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Missing credentials");
+          throw new Error("Please enter your email and password");
         }
 
         const user = await prismadb.user.findFirst({
@@ -22,16 +22,16 @@ export const authOptions: AuthOptions = {
           },
         });
 
-        if (!user || !user.id || !user.hashedPassword) {
-          throw new Error("Invalid credentials");
-        }
-        const correctPassword = await bcrypt.compare(
-          credentials.password,
-          user.hashedPassword
-        );
-        if (!correctPassword) {
-          throw new Error("Invalid credentials");
-        }
+        // if (!user || !user.id || !user.hashedPassword) {
+        //   throw new Error("Invalid credentials");
+        // }
+        // const correctPassword = await bcrypt.compare(
+        //   credentials.password,
+        //   user.hashedPassword
+        // );
+        // if (!correctPassword) {
+        //   throw new Error("Please enter the correct password");
+        // }
 
         return user;
       },
