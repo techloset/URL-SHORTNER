@@ -1,13 +1,10 @@
 "use client";
 import UrlForm from "@/components/UrlForm";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function EditPage() {
   const [linkId, setLinkId] = useState(null);
-
-  const myObject = {
-    message: "Huzaifa",
-  };
 
   return (
     <>
@@ -16,8 +13,16 @@ export default function EditPage() {
           <div className="px-4 sm:px-6 lg:px-8 py-20">
             <h1 className="font-bold text-4xl text-green-900 ">URL SHORTNER</h1>
             <UrlForm setLinkId={setLinkId} />
-            {myObject.message && <div>{myObject.message}</div>}
-            {/* {linkId && <div>{linkId}</div>} */}
+            {linkId && (
+              <div className="bg-green-200 rounded-lg px-4 py-4 mt-4 text-center w-1/2">
+                <Link
+                  href={`/${linkId}`}
+                  // href={`/shortUrl/edit/${linkId}`}
+                >
+                  {`http://localhost:3000/${linkId}`}
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>

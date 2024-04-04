@@ -1,26 +1,19 @@
-"use client";
-
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
 
 export default function UrlForm({ setLinkId }: any) {
   const { register, handleSubmit } = useForm();
 
-  const onFormSubmit = async (values: object) => {
+  const onFormSubmit = async (values: any) => {
     try {
-      const config: AxiosRequestConfig = {
-        method: "POST",
-        url: "/api/shortUrl",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: values,
-      };
-      const res = await axios(config);
+      const res = await axios.post("/api/shortUrl", {
+        link: values,
+      });
+      console.log("Response from API:", res.data);
       if (res.status === 200) {
-        setLinkId(res.data);
-        console.log("bond:", res.data);
+        setLinkId(res.data.linkId);
+        console.log("Link Id:", res.data.linkId);
       }
     } catch (error) {
       console.error("Error occurred:", error);
@@ -34,7 +27,7 @@ export default function UrlForm({ setLinkId }: any) {
           type="text"
           {...register("link")}
           className="bg-gray-100 w-full px-2 h-14 placeholder-gray-600 mt-6 focus:outline-none focus:ring-2  rounded-lg"
-          placeholder="enter your url"
+          placeholder="enter your long url"
         />
         <button
           type="submit"
