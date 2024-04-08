@@ -7,13 +7,14 @@ import chart from "@/public/assets/vectors/chart.svg";
 import setting from "@/public/assets/vectors/cog.svg";
 import filter from "@/public/assets/vectors/filter.svg";
 import Toggler from "@/components/Toggler";
+import Table from "@/components/Table";
 
 export default async function MainPage() {
   const session = await getServerSession(authOptions);
 
   return (
     <>
-      <div className="w-full flex flex-rom justify-between">
+      <div className="w-[1220px] flex flex-row justify-between">
         <div className="py-8 px-6 h-[120px]">
           <Image className="h-[35px]" src={link} alt="" />
         </div>
@@ -42,7 +43,7 @@ export default async function MainPage() {
       </div>
       <Toggler />
       <div className="py-8">
-        <div className=" w-full mx-auto px-12  h-[60px] border rounded-[10px] bg-[#181e29] border-[#181e29] ">
+        <div className=" w-[1250px] mx-auto px-12  h-[60px] border rounded-[10px] bg-[#181e29] border-[#181e29] ">
           <div className="px-32 py-4 flex flex-row justify-around items-center">
             <div className="flex flex-row">
               <h2 className="text-white">History</h2>
@@ -69,9 +70,9 @@ export default async function MainPage() {
           </button>
         </div>
       </div>
-      <div className="px-12 py-6 flex-wrap">
-        <table className="  w-full sm:w-[350px] md:w-full font-light text-sm h-[60px]  text-left rtl:text-right border rounded-[10px] bg-[#0d1117] border-[#181e29] sm:flex-wrap ">
-          <thead className=" h-[60px] text-[#A2A1A8] font-light px-6">
+      <div className="   w-full px-12 py-1">
+        <table className="w-full mx-auto font-light text-sm h-[60px]  text-left rtl:text-right border rounded-[10px] bg-[#181e29] border-[#181e29] sm:flex-wrap ">
+          <thead className="text-[16px] h-[60px] text-[#A2A1A8] font-semibold px-6">
             <tr>
               <th scope="col" className="py-[10px]">
                 Short Link
@@ -79,38 +80,24 @@ export default async function MainPage() {
               <th scope="col" className="py-[10px]">
                 Original Link
               </th>
-              <th scope="col" className="py-[10px]">
+              <th scope="col" className="py-[10px] px-[15px]">
                 OR Code
               </th>
-              <th scope="col" className="py-[10px]">
+              <th scope="col" className="py-[10px] px-[15px]">
                 Clicks
               </th>
-              <th scope="col" className="py-[10px]">
+              <th scope="col" className="py-[10px] px-[15px]">
                 Status
               </th>
-              <th scope="col" className="py-[10px]">
+              <th scope="col" className="py-[10px] px-[30px]">
                 Date
+              </th>
+              <th scope="col" className="py-[10px] px-[30px]">
+                Action
               </th>
             </tr>
           </thead>
-          <tbody className="bg-[#0b101b] text-white">
-            <tr className="border-t-[1px] border-[#8d99ae] h-[60px]">
-              <td scope="row" className=" pt-[10px] flex-wrap ">
-                https://linkly.com/Bn41aCOlnxj
-              </td>
-              <td className="pt-[10px] flex-wrap">
-                https://www.twitter.com/tweets/8erelCoihu/
-              </td>
-              <td className="pt-[10px] flex-wrap">QR Code</td>
-              <td className="pt-[10px] flex-wrap">500</td>
-              <td className="pt-[10px] flex-wrap">
-                <div className="w-fit flex-wrap text-[12px] rounded-[4px] px-[9px] py-[3px] font-light">
-                  Active
-                </div>
-              </td>
-              <td className="pt-[10px] ps-[20px] flex-wrap">24 March 2025</td>
-            </tr>
-          </tbody>
+          <Table />
         </table>
       </div>
     </>

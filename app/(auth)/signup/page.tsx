@@ -7,9 +7,7 @@ import google from "@/public/assets/images/Google.png";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { signOut } from "next-auth/react";
+
 import InputFields from "@/components/Input";
 import FormButton from "@/components/FormButton";
 import useRegister from "@/hooks/useRegister";

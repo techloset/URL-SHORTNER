@@ -7,9 +7,11 @@ export default function UrlForm({ setLinkId }: any) {
 
   const onFormSubmit = async (values: any) => {
     try {
+      const { link } = values;
       const res = await axios.post("/api/shortUrl", {
-        link: values,
+        link: link,
       });
+
       console.log("Response from API:", res.data);
       if (res.status === 200) {
         setLinkId(res.data.linkId);

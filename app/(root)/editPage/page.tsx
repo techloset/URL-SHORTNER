@@ -15,10 +15,7 @@ export default function EditPage() {
             <UrlForm setLinkId={setLinkId} />
             {linkId && (
               <div className="bg-green-200 rounded-lg px-4 py-4 mt-4 text-center w-1/2">
-                <Link
-                  href={`/${linkId}`}
-                  // href={`/shortUrl/edit/${linkId}`}
-                >
+                <Link href={`/${linkId}`}>
                   {`http://localhost:3000/${linkId}`}
                 </Link>
               </div>
