@@ -1,42 +1,72 @@
+"use client";
 import axios from "axios";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
-export default function UrlForm({ setLinkId }: any) {
+export default function UrlForm({ setLinkId }: { setLinkId: any }) {
+  const router = useRouter();
   const { register, handleSubmit } = useForm();
+  const [loading, setLoading] = useState(false);
 
   const onFormSubmit = async (values: any) => {
     try {
+      setLoading(true);
+
       const { link } = values;
       const res = await axios.post("/api/shortUrl", {
         link: link,
       });
 
-      console.log("Response from API:", res.data);
       if (res.status === 200) {
         setLinkId(res.data.linkId);
-        console.log("Link Id:", res.data.linkId);
+        toast.success("Link is shortened successfully");
+
+        // Navigate to the main page after URL is shortened successfully
+        router.push("/");
       }
     } catch (error) {
       console.error("Error occurred:", error);
+      toast.error("Failed to shorten the link");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <>
       <form onSubmit={handleSubmit(onFormSubmit)}>
-        <input
-          type="text"
-          {...register("link")}
-          className="bg-gray-100 w-full px-2 h-14 placeholder-gray-600 mt-6 focus:outline-none focus:ring-2  rounded-lg"
-          placeholder="enter your long url"
-        />
-        <button
-          type="submit"
-          className="mt-4 px-4 text-xl py-2 bg-indigo-700 hover:bg-indigo-500 text-white rounded-lg "
-        >
-          Shorten Me
-        </button>
+        <div className="max-w-[859px] mx-auto max-h-[70px] my-[46px] mt-[100px]  border-[4px] rounded-[48px] border-[#353C4A] bg-[#181E29] items-center flex flex-row justify-center px-8 py-2">
+          <input
+            {...register("link")}
+            type="text"
+            placeholder="Enter the link to shorten here"
+            className="w-full sm:[450px] outline-none bg-[#181E29] h-[50px] rounded-[48px] text-white  py-2"
+          />
+        </div>
+        <div className="max-w-[859px] mx-auto max-h-[70px] my-[46px] border-[4px] rounded-[48px] border-[#353C4A] bg-[#181E29] items-center flex flex-row justify-center px-8 py-4">
+          <input
+            type="text"
+            placeholder="Enter custom slug"
+            className="w-full sm:[450px] outline-none bg-[#181E29] h-[50px] rounded-[48px] text-white  py-2"
+          />
+          <div className="flex flex-row justify-center items-center ">
+            <button className="sm:w-[176px] md:w-[176px] bg-[#144EE3] shadow-[#144ee3] shadow-md  h-[50px]  border rounded-[48px] border-[#144EE3] text-white text-[13px] font-semibold cursor-pointer relative">
+              Auto Generate
+            </button>
+          </div>
+        </div>
+
+        <div className="flex flex-row justify-center items-center">
+          <button
+            type="submit"
+            className="w-[140px] sm:w-[140px] md:w-[200px] bg-[#144EE3] shadow-[#144ee3] shadow-md h-[50px] border rounded-[48px] border-[#144EE3] text-white text-[13px] font-semibold cursor-pointer px-6 py-2 relative"
+            disabled={loading}
+          >
+            {loading ? "Wait for a moment" : "Shorten Now"}{" "}
+          </button>
+        </div>
       </form>
     </>
   );

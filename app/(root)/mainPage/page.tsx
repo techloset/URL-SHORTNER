@@ -1,17 +1,16 @@
+"use client";
 import Image from "next/image";
+import React from "react";
 import link from "@/public/assets/vectors/Linkly.svg";
+
 import bell from "@/public/assets/images/Bell.png";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/libs/AuthOptions";
+
+import Toggler from "@/components/Toggler";
+import Table from "@/components/Table";
 import chart from "@/public/assets/vectors/chart.svg";
 import setting from "@/public/assets/vectors/cog.svg";
 import filter from "@/public/assets/vectors/filter.svg";
-import Toggler from "@/components/Toggler";
-import Table from "@/components/Table";
-
-export default async function MainPage() {
-  const session = await getServerSession(authOptions);
-
+export default async function TrialPage() {
   return (
     <>
       <div className="w-[1220px] flex flex-row justify-between">
@@ -33,7 +32,7 @@ export default async function MainPage() {
         <div className=" flex flex-row py-5 px-4 gap-6">
           <div className="text-white w-[150px] h-[46px] flex items-center gap-4 shadow-md mb-5 border rounded-[48px] border-[#353C4A] bg-[#181E29] pl-9 mt-1 ">
             <div className="text-center items-center px-3.5">
-              {session?.user?.email?.slice(0, 6)}
+              {/* {session?.user?.email?.slice(0, 7)} */}
             </div>
           </div>
           <button className="w-[40px] sm:w-[40px]  md:w-[68px] bg-[#144EE3] h-[50px]  border rounded-[88px] border-[#144EE3] shadow-[#708bcd] text-white text-[13px] font-semibold cursor-pointer px-6 py-2 relative">
@@ -70,8 +69,8 @@ export default async function MainPage() {
           </button>
         </div>
       </div>
-      <div className="   w-full px-12 py-1">
-        <table className="w-full mx-auto font-light text-sm h-[60px]  text-left rtl:text-right border rounded-[10px] bg-[#181e29] border-[#181e29] sm:flex-wrap ">
+      <div className="   w-[1250px] px-12 py-1">
+        <table className=" sm:w-[350px] md:w-full font-light text-sm h-[60px]  text-left rtl:text-right border rounded-[10px] bg-[#181e29] border-[#181e29] sm:flex-wrap ">
           <thead className="text-[16px] h-[60px] text-[#A2A1A8] font-semibold px-6">
             <tr>
               <th scope="col" className="py-[10px]">
@@ -97,7 +96,11 @@ export default async function MainPage() {
               </th>
             </tr>
           </thead>
-          <Table />
+          <Table
+            params={{
+              id: "",
+            }}
+          />
         </table>
       </div>
     </>

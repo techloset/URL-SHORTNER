@@ -61,7 +61,7 @@ export default function TrialPage() {
       <div className="text-white text-center py-12 font-extralight">
         You can create{" "}
         <span style={{ color: "#eb568e", fontWeight: "bold" }}>05</span> more
-        links. <Link href={"/editPage"}>Register Now</Link> to enjoy Unlimited
+        links. <Link href={"/shortUrl"}>Register Now</Link> to enjoy Unlimited
         usage
       </div>
       <div className="   w-[1250px] px-12 py-1">
@@ -88,7 +88,11 @@ export default function TrialPage() {
               </th>
             </tr>
           </thead>
-          <Table />
+          <Table
+            params={{
+              id: "",
+            }}
+          />
         </table>
       </div>
     </>

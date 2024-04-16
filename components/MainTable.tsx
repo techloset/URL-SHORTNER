@@ -6,7 +6,9 @@ import dlt from "@/public/assets/vectors/bin.svg";
 import Link from "next/link";
 import useDelete from "@/hooks/useDelete";
 
-export default function Table({ params }: { params: { id: string } }) {
+export default function MainTable({ params }: { params: { id: string } }) {
+  console.log(params);
+
   const { posts, handleDelete } = useDelete();
 
   return (
@@ -21,7 +23,7 @@ export default function Table({ params }: { params: { id: string } }) {
               {post.shortUrl}
             </td>
             <td className="pt-[10px] flex flex-row mt-4 gap-2">
-              <td className="w-fit flex-wrap">{post.longUrl.slice(0, 60)}</td>
+              <td className="w-fit flex-wrap">{post.longUrl.slice(0, 100)}</td>
             </td>
             <td className="pt-[10px] px-[20px]">
               <Image src={qr} alt="" />
