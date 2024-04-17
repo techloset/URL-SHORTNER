@@ -1,17 +1,11 @@
-import React from "react";
-
-interface ButtonProps {
-  onClick: () => void;
-  label: string;
-  isLoading: boolean;
-}
+import { ButtonProps } from "@/types/types";
 
 const FormButton: React.FC<ButtonProps> = ({ onClick, label, isLoading }) => {
   return (
     <button
       onClick={onClick}
       className="w-[200px] bg-[#144EE3] h-[50px]  border rounded-[48px] border-[#144EE3] text-white font-semibold cursor-pointer px-6 py-2 relative"
-      disabled={isLoading} // Disable button if loading
+      disabled={isLoading}
     >
       {isLoading ? (
         <div className="flex justify-center items-center">

@@ -2,22 +2,13 @@
 
 import UrlForm from "@/components/urlForm/UrlForm";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import look from "@/public/assets/images/Linkly.png";
 import button from "@/public/assets/vectors/Button.svg";
 import Loader from "@/components/loader/Loader";
+import useLoader from "@/hooks/useLoader";
 
 export default function ShortUrl({ params }: { params: { id: string } }) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [linkId, setLinkId] = useState(null);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
+  const { isLoading, setLinkId } = useLoader();
   return (
     <>
       {isLoading ? (

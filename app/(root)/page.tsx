@@ -11,20 +11,14 @@ import Table from "@/components/table/Table";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import Loader from "@/components/loader/Loader";
+import useLoader from "@/hooks/useLoader";
 
 export default function TrialPage() {
   const handleSignOut = async () => {
     await signOut();
   };
 
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
+  const { isLoading } = useLoader();
 
   return (
     <>

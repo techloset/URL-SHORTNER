@@ -3,6 +3,7 @@ import { updateParams } from "@/types/types";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import EditButton from "../editButton/EditButton";
 
 export default function EditForm({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -89,15 +90,10 @@ export default function EditForm({ params }: { params: { id: string } }) {
           </div>
         </div>
 
-        <div className="flex flex-row justify-center items-center">
-          <button
-            type="submit"
-            className="w-[140px] sm:w-[140px] md:w-[200px] bg-[#144EE3] shadow-[#144ee3] shadow-md h-[50px] border rounded-[48px] border-[#144EE3] text-white text-[13px] font-semibold cursor-pointer px-6 py-2 relative"
-            disabled={loading}
-          >
-            {loading ? "Loading..." : "Edit Now"}
-          </button>
-        </div>
+        <EditButton
+          loading={loading}
+          label={loading ? "Loading..." : "EditNow"}
+        />
       </form>
     </>
   );

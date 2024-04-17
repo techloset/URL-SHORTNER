@@ -11,15 +11,10 @@ import chart from "@/public/assets/vectors/chart.svg";
 import setting from "@/public/assets/vectors/cog.svg";
 import filter from "@/public/assets/vectors/filter.svg";
 import Loader from "@/components/loader/Loader";
+import useLogin from "@/hooks/useLogin";
+import useLoader from "@/hooks/useLoader";
 export default function MainPage() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
+  const { isLoading } = useLoader();
 
   return (
     <>

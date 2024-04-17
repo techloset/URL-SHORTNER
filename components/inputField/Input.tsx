@@ -1,9 +1,4 @@
-interface InputProps {
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string;
-  type: string;
-}
+import { InputProps } from "@/types/types";
 
 const InputFields: React.FC<InputProps> = ({
   value,

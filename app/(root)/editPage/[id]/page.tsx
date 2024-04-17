@@ -3,20 +3,11 @@ import Image from "next/image";
 import look from "@/public/assets/images/Linkly.png";
 import button from "@/public/assets/vectors/Button.svg";
 import EditForm from "@/components/editForm/EditForm";
-import { useEffect, useState } from "react";
 import Loader from "@/components/loader/Loader";
+import useLoader from "@/hooks/useLoader";
 
 export default function EditPage({ params }: { params: { id: string } }) {
-  console.log(params);
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
+  const { isLoading } = useLoader();
 
   return (
     <>
