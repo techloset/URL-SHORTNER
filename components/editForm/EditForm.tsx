@@ -1,17 +1,11 @@
 "use client";
+import { updateParams } from "@/types/types";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
-interface updateParams {
-  longUrl: string;
-  id: string;
-}
 export default function EditForm({ params }: { params: { id: string } }) {
   const router = useRouter();
-
-  console.log(params);
-
   const updateBlog = async (data: updateParams) => {
     const res = await fetch(`http://localhost:3000/api/shortUrl/${data.id}`, {
       method: "PUT",
