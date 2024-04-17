@@ -23,8 +23,7 @@ export default function UrlForm({ setLinkId }: { setLinkId: any }) {
         setLinkId(res.data.linkId);
         toast.success("Link is shortened successfully");
 
-        // Navigate to the main page after URL is shortened successfully
-        router.push("/");
+        router.push("/mainPage");
       }
     } catch (error) {
       console.error("Error occurred:", error);

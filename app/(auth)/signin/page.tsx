@@ -6,8 +6,8 @@ import look from "@/public/assets/images/Look.png";
 import google from "@/public/assets/images/Google.png";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
-import InputFields from "@/components/Input";
-import FormButton from "@/components/FormButton";
+import InputFields from "@/components/inputField/Input";
+import FormButton from "@/components/formButton/FormButton";
 import useLogin from "@/hooks/useLogin";
 
 export default function LoginForm() {

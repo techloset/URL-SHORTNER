@@ -8,8 +8,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-import InputFields from "@/components/Input";
-import FormButton from "@/components/FormButton";
+import InputFields from "@/components/inputField/Input";
+import FormButton from "@/components/formButton/FormButton";
 import useRegister from "@/hooks/useRegister";
 
 export default function RegisterForm() {
