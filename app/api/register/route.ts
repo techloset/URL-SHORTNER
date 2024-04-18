@@ -4,8 +4,6 @@ import bcrypt from "bcrypt";
 import { PrismaClient } from "@prisma/client";
 
 export async function POST(req: Request) {
-  const prismadb = new PrismaClient();
-
   try {
     const body = await req.json();
 
