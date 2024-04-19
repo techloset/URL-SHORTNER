@@ -1,10 +1,12 @@
-// import { updateParams } from "@/types/types";
-// import { useRouter } from "next/navigation";
-// import { useEffect, useRef, useState } from "react";
+// "use client";
+// import { useState, useEffect, useRef } from "react";
 // import toast from "react-hot-toast";
+// import { useRouter } from "next/navigation";
+// import { updateParams } from "@/types/types";
 
-// export default function useEdit({ params }: { params: { id: string } }) {
+// function useEditForm(params: { id: string }) {
 //   const router = useRouter();
+
 //   const updateBlog = async (data: updateParams) => {
 //     const res = await fetch(`http://localhost:3000/api/shortUrl/${data.id}`, {
 //       method: "PUT",
@@ -30,15 +32,14 @@
 //   };
 
 //   const urlRef = useRef<HTMLInputElement | null>(null);
+//   const [loading, setLoading] = useState(false);
 
 //   useEffect(() => {
 //     toast.loading("Fetching URL 🚀", { id: "1" });
 //     getBlogById(params.id)
 //       .then((data) => {
 //         if (urlRef.current) {
-//           urlRef.current.value = data.post.longUrl;
-//           console.log(data.post.longUrl);
-
+//           urlRef.current.value = data.post.shortUrl;
 //           toast.success("Fetching Completed", { id: "1" });
 //         }
 //       })
@@ -61,42 +62,40 @@
 //     }
 //   };
 
-//   const [loading, setLoading] = useState(false);
-
-//   return {
-//     loading,
-//     setLoading,
-//     handleUrl,
-//     urlRef,
-//   };
+//   return { urlRef, handleUrl, loading };
 // }
+
+// export default useEditForm;
+
 "use client";
 import { useState, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 import { updateParams } from "@/types/types";
 
 function useEditForm(params: { id: string }) {
   const router = useRouter();
 
   const updateBlog = async (data: updateParams) => {
-    const res = await fetch(`http://localhost:3000/api/shortUrl/${data.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        longUrl: data.longUrl,
-      }),
-    });
-    return (await res).json();
+    try {
+      const res = await axios.put(
+        `http://localhost:3000/api/shortUrl/${data.id}`,
+        {
+          longUrl: data.longUrl,
+        }
+      );
+      return res.data;
+    } catch (error) {
+      console.error("Error updating URL:", error);
+      throw error;
+    }
   };
 
   const getBlogById = async (id: string) => {
     try {
-      const res = await fetch(`http://localhost:3000/api/shortUrl/${id}`);
-      const data = await res.json();
-      return data;
+      const res = await axios.get(`http://localhost:3000/api/shortUrl/${id}`);
+      return res.data;
     } catch (error) {
       console.error("Error fetching URL:", error);
       throw error;
@@ -111,7 +110,7 @@ function useEditForm(params: { id: string }) {
     getBlogById(params.id)
       .then((data) => {
         if (urlRef.current) {
-          urlRef.current.value = data.post.longUrl;
+          urlRef.current.value = data.post.shortUrl;
           toast.success("Fetching Completed", { id: "1" });
         }
       })

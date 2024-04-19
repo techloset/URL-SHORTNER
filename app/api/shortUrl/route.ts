@@ -12,7 +12,7 @@ export async function main() {
   }
 }
 
-export const GET = async (req: Request, res: NextResponse) => {
+export const GET = async (req: NextRequest) => {
   try {
     await main();
     const posts = await prisma.link.findMany();
@@ -40,6 +40,7 @@ export const POST = async (req: NextRequest) => {
       data: {
         longUrl: link,
         shortUrl: id,
+        clickCount: 0,
       },
     });
     console.log("addLink =>", addLink);
@@ -50,6 +51,30 @@ export const POST = async (req: NextRequest) => {
     });
   } catch (err) {
     console.error("Error creating link:", err);
+    return NextResponse.json({ message: "Something went wrong" });
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+export const PUT = async (req: NextRequest) => {
+  try {
+    await main();
+    const { linkId } = await req.json();
+
+    const updatedLink = await prisma.link.update({
+      where: { id: linkId },
+      data: {
+        clickCount: {
+          increment: 1,
+        },
+      },
+    });
+    console.log(updatedLink);
+
+    return NextResponse.json({ message: "Click count updated successfully" });
+  } catch (err) {
+    console.error("Error updating click count:", err);
     return NextResponse.json({ message: "Something went wrong" });
   } finally {
     await prisma.$disconnect();

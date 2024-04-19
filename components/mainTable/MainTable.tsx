@@ -1,4 +1,4 @@
-"use client'";
+"use client";
 import Image from "next/image";
 import qr from "@/public/assets/vectors/QR.svg";
 import edit from "@/public/assets/vectors/edit.svg";
@@ -7,9 +7,11 @@ import Link from "next/link";
 import useDelete from "@/hooks/useDelete";
 
 export default function MainTable({ params }: { params: { id: string } }) {
-  console.log(params);
-
   const { posts, handleDelete } = useDelete();
+
+  const redirectToLongUrl = (longUrl: string) => {
+    window.open(longUrl, "_blank");
+  };
 
   return (
     <>
@@ -19,16 +21,28 @@ export default function MainTable({ params }: { params: { id: string } }) {
             key={post.id}
             className="border-t-[1px] border-[#8d99ae] h-[60px]"
           >
-            <td scope="row" className="pt-[10px] flex-wrap">
-              {post.shortUrl}
+            <td scope="row" className="pt-[10px]">
+              <Link
+                href={""}
+                className="text-whites "
+                onClick={() => redirectToLongUrl(post.longUrl)}
+              >
+                {"https://" + post.shortUrl}
+              </Link>
             </td>
             <td className="pt-[10px] flex flex-row mt-4 gap-2">
-              <td className="w-fit flex-wrap">{post.longUrl.slice(0, 100)}</td>
+              <Link
+                href={""}
+                className="text-white "
+                onClick={() => redirectToLongUrl(post.longUrl)}
+              >
+                {post.longUrl.slice(0, 60)}
+              </Link>
             </td>
             <td className="pt-[10px] px-[20px]">
               <Image src={qr} alt="" />
             </td>
-            <td className="pt-[10px] px-[20px]">500</td>
+            <td className="pt-[10px] px-[20px]">{post.clickCount}</td>
             <td className="pt-[10px]">
               <div className="w-fit text-[12px] rounded-[4px] px-[20px] py-[3px] font-semibold text-[#13b036]">
                 Active

@@ -1,3 +1,4 @@
+"use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -15,7 +16,7 @@ export default function UrlForm({ setLinkId }: { setLinkId: any }) {
       setLoading(true);
 
       const { link } = values;
-      const res = await axios.post("/api/shortUrl", {
+      const res = await axios.post("/api/urlShort", {
         link: link,
       });
 
@@ -59,7 +60,7 @@ export default function UrlForm({ setLinkId }: { setLinkId: any }) {
 
         <EditButton
           loading={loading}
-          label={loading ? "Loading..." : "Shorten Now"}
+          label={loading ? "Loading..." : "Shorten Now🚀"}
         />
       </form>
     </>

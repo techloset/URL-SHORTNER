@@ -27,5 +27,7 @@ model Link {
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
   date DateTime? @default(now())
+  clickCount Int      @default(0)
 }
+
 

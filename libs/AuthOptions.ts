@@ -1,8 +1,9 @@
 import { AuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import prismadb from "@/libs/prismadb";
-import bcrypt from "bcrypt";
 import GoogleProvider from "next-auth/providers/google";
+
+const bcrypt = require("bcrypt");
 
 export const authOptions: AuthOptions = {
   providers: [
