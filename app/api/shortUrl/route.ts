@@ -60,10 +60,10 @@ export const POST = async (req: NextRequest) => {
 export const PUT = async (req: NextRequest) => {
   try {
     await main();
-    const { linkId } = await req.json();
+    const { link } = await req.json();
 
     const updatedLink = await prisma.link.update({
-      where: { id: linkId },
+      where: { id: link },
       data: {
         clickCount: {
           increment: 1,

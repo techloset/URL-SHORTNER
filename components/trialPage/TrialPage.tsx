@@ -10,13 +10,13 @@ import link from "@/public/assets/vectors/Linkly.svg";
 import sign from "@/public/assets/vectors/sign-in.svg";
 import look from "@/public/assets/vectors/Looks.svg";
 import linking from "@/public/assets/vectors/link.svg";
-import useLoader from "@/hooks/useLoader";
+import useDelete from "@/hooks/useDelete";
 
 export default function HomePage() {
   const handleSignOut = async () => {
     await signOut();
   };
-  const { isLoading } = useLoader();
+  const { isLoading } = useDelete();
   return (
     <>
       {isLoading ? (

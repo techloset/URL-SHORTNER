@@ -16,7 +16,7 @@ export default function UrlForm({ setLinkId }: { setLinkId: any }) {
       setLoading(true);
 
       const { link } = values;
-      const res = await axios.post("/api/urlShort", {
+      const res = await axios.post("/api/shortUrl", {
         link: link,
       });
 

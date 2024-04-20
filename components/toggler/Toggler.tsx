@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Toggler() {
   return (
     <div className="flex flex-row justify-center items-center flex-wrap gap-2">
