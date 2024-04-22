@@ -1,4 +1,6 @@
+import { authOptions } from "@/libs/AuthOptions";
 import { PrismaClient } from "@prisma/client";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
@@ -15,7 +17,7 @@ export async function main() {
 export const GET = async (req: NextRequest) => {
   try {
     await main();
-    const posts = await prisma.link.findMany();
+    const posts = await prisma.userLinks.findMany();
     return NextResponse.json({ message: "Posts fetched successfully", posts });
   } catch (error: any) {
     console.error("Error fetching posts:", error);
@@ -29,6 +31,8 @@ export const GET = async (req: NextRequest) => {
 };
 
 export const POST = async (req: NextRequest) => {
+  const session = await getServerSession(authOptions);
+  const email = session?.user?.email;
   try {
     await main();
     const { link } = await req.json();
@@ -36,11 +40,12 @@ export const POST = async (req: NextRequest) => {
 
     const id = Math.random().toString(36).substring(2, 16);
 
-    const addLink = await prisma.link.create({
+    const addLink = await prisma.userLinks.create({
       data: {
         longUrl: link,
         shortUrl: id,
         clickCount: 0,
+        email: email,
       },
     });
     console.log("addLink =>", addLink);
@@ -62,7 +67,7 @@ export const PUT = async (req: NextRequest) => {
     const { shortUrl } = await req.json();
     console.log("Received shortUrl:", shortUrl);
 
-    const url = await prisma.link.findUnique({
+    const url = await prisma.userLinks.findUnique({
       where: { shortUrl },
     });
 
@@ -73,7 +78,7 @@ export const PUT = async (req: NextRequest) => {
 
     console.log("Found URL:", url);
 
-    const updatedUrl = await prisma.link.update({
+    const updatedUrl = await prisma.userLinks.update({
       where: { shortUrl },
       data: { clickCount: url.clickCount + 1 },
     });

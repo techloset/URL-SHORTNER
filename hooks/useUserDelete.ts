@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-export default function useDelete() {
+export default function useUserDelete() {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -14,7 +14,7 @@ export default function useDelete() {
   async function fetchUrls() {
     try {
       setIsLoading(true);
-      const response = await axios.get("http://localhost:3000/api/shortUrl");
+      const response = await axios.get("http://localhost:3000/api/userUrl");
       console.log("Updated posts after fetch:", response.data.posts);
       setPosts(response.data.posts);
     } catch (error) {
@@ -27,9 +27,7 @@ export default function useDelete() {
     try {
       setIsLoading(true);
 
-      const res = await axios.delete(
-        `http://localhost:3000/api/shortUrl/${id}`
-      );
+      const res = await axios.delete(`http://localhost:3000/api/userUrl/${id}`);
       return res.data;
     } catch (error) {
       console.error("Error deleting URL:", error);
@@ -46,7 +44,7 @@ export default function useDelete() {
       console.log("Data:", shortUrl);
 
       const resUrl = await axios.put(
-        `http://localhost:3000/api/shortUrl/${shortUrl}`
+        `http://localhost:3000/api/userUrl/${shortUrl}`
       );
       console.log("Response:", resUrl);
 

@@ -5,13 +5,13 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { updateParams } from "@/types/types";
 
-function useEditForm(params: { id: string }) {
+function useUserEditForm(params: { id: string }) {
   const router = useRouter();
 
   const updateBlog = async (data: updateParams) => {
     try {
       const res = await axios.put(
-        `http://localhost:3000/api/shortUrl/${data.id}`,
+        `http://localhost:3000/api/userUrl/${data.id}`,
         {
           longUrl: data.longUrl,
         }
@@ -25,7 +25,7 @@ function useEditForm(params: { id: string }) {
 
   const getBlogById = async (id: string) => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/shortUrl/${id}`);
+      const res = await axios.get(`http://localhost:3000/api/userUrl/${id}`);
       return res.data;
     } catch (error) {
       console.error("Error fetching URL:", error);
@@ -60,11 +60,11 @@ function useEditForm(params: { id: string }) {
         id: params.id,
       });
       toast.success("Your URL is Updated Successfully", { id: "1" });
-      router.push("/");
+      router.push("/mainPage");
     }
   };
 
   return { urlRef, handleUrl, loading };
 }
 
-export default useEditForm;
+export default useUserEditForm;

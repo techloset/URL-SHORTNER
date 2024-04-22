@@ -5,12 +5,14 @@ import edit from "@/public/assets/vectors/edit.svg";
 import dlt from "@/public/assets/vectors/bin.svg";
 import Link from "next/link";
 import useDelete from "@/hooks/useDelete";
+import useUserDelete from "@/hooks/useUserDelete";
 
 export default function Table({ params }: { params: { id: string } }) {
-  const { posts, handleDelete, updateUrl } = useDelete();
+  const { posts, handleDelete, handleClick } = useDelete();
 
-  const redirectToLongUrl = (longUrl: string) => {
+  const redirectToLongUrl = async (longUrl: string, shortUrl: string) => {
     window.open(longUrl, "_blank");
+    await handleClick(shortUrl);
   };
 
   return (
@@ -25,7 +27,7 @@ export default function Table({ params }: { params: { id: string } }) {
               <Link
                 href={""}
                 className="text-white "
-                onClick={() => redirectToLongUrl(post.longUrl)}
+                onClick={() => redirectToLongUrl(post.longUrl, post.shortUrl)}
               >
                 {"https://" + post.shortUrl}
               </Link>
@@ -34,7 +36,7 @@ export default function Table({ params }: { params: { id: string } }) {
               <Link
                 href={""}
                 className="text-white "
-                onClick={() => redirectToLongUrl(post.longUrl)}
+                onClick={() => redirectToLongUrl(post.longUrl, post.shortUrl)}
               >
                 {post.longUrl.slice(0, 60)}
               </Link>
@@ -43,18 +45,13 @@ export default function Table({ params }: { params: { id: string } }) {
               <Image src={qr} alt="" />
             </td>
             <td
-              onClick={() => updateUrl(post.shortUrl)}
+              onClick={() => {
+                handleClick(post.shortUrl);
+              }}
               className="pt-[10px] px-[20px]"
             >
               {post.clickCount}
             </td>
-
-            {/* <td
-              onClick={() => updateUrl(post.shortUrl)}
-              className="pt-[10px] px-[20px]"
-            >
-              {post.clickCount}
-            </td> */}
             <td className="pt-[10px]">
               <div className="w-fit text-[12px] rounded-[4px] px-[20px] py-[3px] font-semibold text-[#13b036]">
                 Active

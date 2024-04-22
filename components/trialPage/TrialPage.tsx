@@ -11,12 +11,13 @@ import sign from "@/public/assets/vectors/sign-in.svg";
 import look from "@/public/assets/vectors/Looks.svg";
 import linking from "@/public/assets/vectors/link.svg";
 import useDelete from "@/hooks/useDelete";
+import useUserDelete from "@/hooks/useUserDelete";
 
 export default function HomePage() {
   const handleSignOut = async () => {
     await signOut();
   };
-  const { isLoading } = useDelete();
+  const { isLoading } = useUserDelete();
   return (
     <>
       {isLoading ? (
