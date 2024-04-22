@@ -23,7 +23,7 @@ export default function useDelete() {
     }
   }
 
-  const deleteBlog = async (id: string) => {
+  const deleteUrl = async (id: string) => {
     try {
       setIsLoading(true);
 
@@ -39,11 +39,26 @@ export default function useDelete() {
     }
   };
 
+  const updateUrl = async (shortUrl: string) => {
+    try {
+      setIsLoading(true);
+      const res = await axios.put(`http://localhost:3000/api/shortUrl`, {
+        shortUrl,
+      });
+      return res.data;
+    } catch (error) {
+      console.log("Error while updating the clicks");
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleDelete = async (id: string) => {
     try {
       setIsLoading(true);
       toast.loading("Deleting your URL", { id: "2" });
-      await deleteBlog(id);
+      await deleteUrl(id);
       toast.success("Your URL is Deleted Successfully", { id: "2" });
       fetchUrls();
     } catch (error) {
@@ -53,5 +68,5 @@ export default function useDelete() {
     }
   };
 
-  return { posts, handleDelete, isLoading };
+  return { posts, handleDelete, isLoading, updateUrl };
 }

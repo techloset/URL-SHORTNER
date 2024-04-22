@@ -2,10 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* body {
   background-color: #0b101b;
-}
+} */
 
-.gradient-custom {
-  background: linear-gradient(to right, #0b101b 0%, #0b101b 57%);
+body {
+  background-image: url("/Register.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }

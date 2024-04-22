@@ -59,24 +59,33 @@ export const POST = async (req: NextRequest) => {
 
 export const PUT = async (req: NextRequest) => {
   try {
-    await main();
-    const { link } = await req.json();
+    const { shortUrl } = await req.json();
+    console.log("Received shortUrl:", shortUrl);
 
-    const updatedLink = await prisma.link.update({
-      where: { id: link },
-      data: {
-        clickCount: {
-          increment: 1,
-        },
-      },
+    const url = await prisma.link.findUnique({
+      where: { shortUrl },
     });
-    console.log(updatedLink);
 
-    return NextResponse.json({ message: "Click count updated successfully" });
+    if (!url) {
+      return NextResponse.json({ message: "URL not found" });
+    }
+
+    const updatedUrl = await prisma.link.update({
+      where: { shortUrl },
+      data: { clickCount: url.clickCount + 1 },
+    });
+
+    console.log("Updated URL =>", updatedUrl);
+
+    return NextResponse.json({
+      message: "URL accessed successfully",
+      longUrl: updatedUrl.longUrl,
+      shortUrl: updatedUrl.shortUrl,
+      clickCount: updatedUrl.clickCount,
+      id: updatedUrl.id,
+    });
   } catch (err) {
-    console.error("Error updating click count:", err);
+    console.error("Error accessing URL:", err);
     return NextResponse.json({ message: "Something went wrong" });
-  } finally {
-    await prisma.$disconnect();
   }
 };

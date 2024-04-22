@@ -7,7 +7,7 @@ import Link from "next/link";
 import useDelete from "@/hooks/useDelete";
 
 export default function Table({ params }: { params: { id: string } }) {
-  const { posts, handleDelete } = useDelete();
+  const { posts, handleDelete, updateUrl } = useDelete();
 
   const redirectToLongUrl = (longUrl: string) => {
     window.open(longUrl, "_blank");
@@ -15,7 +15,7 @@ export default function Table({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <tbody className="bg-[#0b101b] text-white w-full ">
+      <tbody className=" text-white w-full ">
         {posts.map((post: any) => (
           <tr
             key={post.id}
@@ -24,7 +24,7 @@ export default function Table({ params }: { params: { id: string } }) {
             <td scope="row" className="pt-[10px]">
               <Link
                 href={""}
-                className="text-whites "
+                className="text-white "
                 onClick={() => redirectToLongUrl(post.longUrl)}
               >
                 {"https://" + post.shortUrl}
@@ -42,7 +42,19 @@ export default function Table({ params }: { params: { id: string } }) {
             <td className="pt-[10px] px-[20px]">
               <Image src={qr} alt="" />
             </td>
-            <td className="pt-[10px] px-[20px]">{post.clickCount}</td>
+            <td
+              onClick={() => updateUrl(post.shortUrl)}
+              className="pt-[10px] px-[20px]"
+            >
+              {post.clickCount}
+            </td>
+
+            {/* <td
+              onClick={() => updateUrl(post.shortUrl)}
+              className="pt-[10px] px-[20px]"
+            >
+              {post.clickCount}
+            </td> */}
             <td className="pt-[10px]">
               <div className="w-fit text-[12px] rounded-[4px] px-[20px] py-[3px] font-semibold text-[#13b036]">
                 Active

@@ -71,7 +71,7 @@ export default function HomePage() {
             Unlimited usage
           </div>
           <div className="   w-[1250px] px-12 py-1">
-            <table className=" sm:w-[350px] md:w-full font-light text-sm h-[60px]  text-left rtl:text-right border rounded-[10px] bg-[#181e29] border-[#181e29] sm:flex-wrap ">
+            <table className=" sm:w-[350px] md:w-full font-light text-sm h-[60px]  text-left rtl:text-right border rounded-[10px]  border-[#181e29] sm:flex-wrap ">
               <thead className="text-[16px] h-[60px] text-[#A2A1A8] font-semibold px-6">
                 <tr>
                   <th scope="col" className="py-[10px]">
