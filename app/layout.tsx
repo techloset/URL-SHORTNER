@@ -3,6 +3,7 @@ import { Lexend } from "next/font/google";
 import "./globals.css";
 import ToastProvider from "@/providers/ToastProvider";
 import AuthProvider from "@/providers/AuthProvider";
+import ReduxProvider from "@/providers/ReduxProvider";
 
 const lexend = Lexend({ subsets: ["latin"] });
 
@@ -19,8 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${lexend.className}`}>
-        <ToastProvider />
-        <AuthProvider>{children}</AuthProvider>
+        <ReduxProvider>
+          <ToastProvider />
+          <AuthProvider>{children}</AuthProvider>
+        </ReduxProvider>
       </body>
     </html>
   );

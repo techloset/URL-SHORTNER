@@ -11,11 +11,12 @@ export default function useDelete() {
     fetchUrls();
   }, []);
 
+  const URL = "http://localhost:3000";
+
   async function fetchUrls() {
     try {
       setIsLoading(true);
-      const response = await axios.get("http://localhost:3000/api/shortUrl");
-      console.log("Updated posts after fetch:", response.data.posts);
+      const response = await axios.get(`${URL}/api/shortUrl`);
       setPosts(response.data.posts);
     } catch (error) {
       console.error("Error fetching URLs:", error);
@@ -27,12 +28,10 @@ export default function useDelete() {
     try {
       setIsLoading(true);
 
-      const res = await axios.delete(
-        `http://localhost:3000/api/shortUrl/${id}`
-      );
+      const res = await axios.delete(`${URL}/api/shortUrl/${id}`);
       return res.data;
     } catch (error) {
-      console.error("Error deleting URL:", error);
+      toast.error("Error deleting URL:");
       throw error;
     } finally {
       setIsLoading(false);
@@ -45,9 +44,7 @@ export default function useDelete() {
 
       console.log("Data:", shortUrl);
 
-      const resUrl = await axios.put(
-        `http://localhost:3000/api/shortUrl/${shortUrl}`
-      );
+      const resUrl = await axios.put(`${URL}/api/shortUrl/${shortUrl}`);
       console.log("Response:", resUrl);
 
       return resUrl.data;

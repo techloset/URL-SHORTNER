@@ -34,7 +34,7 @@ export default function RegisterForm() {
         <Loader />
       ) : (
         <>
-          <div className="w-full h-[200px] flex flex-col justify-between items-center">
+          <div className="w-full h-full flex flex-col justify-between items-center">
             <div className="py-8">
               <Image src={link} alt="" />
             </div>
@@ -79,7 +79,7 @@ export default function RegisterForm() {
             </div>
 
             <FormButton
-              onClick={register}
+              onClick={register.bind(null, emailValue, passwordValue)}
               label={loading ? "Logging in..." : "Register"}
               isLoading={loading}
             />

@@ -20,3 +20,30 @@ export interface EditButtonProps {
   label: string;
   loading: boolean;
 }
+
+export interface User {
+  email: string;
+  password: string;
+}
+export interface AuthState {
+  user: User | null;
+  isLoading: boolean;
+  error: string | null;
+}
+
+export interface SignUp {
+  email: string;
+  password: string;
+}
+
+export interface SignIn {
+  email: string;
+  password: string;
+}
+
+export interface UrlItems {
+  id: User | string;
+  longUrl: string;
+  shortUrl: string;
+  date: number;
+}
