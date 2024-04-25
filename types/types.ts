@@ -41,9 +41,16 @@ export interface SignIn {
   password: string;
 }
 
-export interface UrlItems {
-  id: User | string;
+export interface Url {
+  id: string;
   longUrl: string;
   shortUrl: string;
   date: number;
+  clickCount: number;
+  posts: string;
+}
+
+export interface UrlState {
+  urls: Url[];
+  isLoading: boolean;
 }

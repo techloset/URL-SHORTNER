@@ -1,6 +1,7 @@
+"use client";
 import { useSession } from "next-auth/react";
 
-export default function UserName() {
+export default function Profile() {
   const { data: sessions } = useSession();
   console.log("sess", sessions?.user?.email);
 

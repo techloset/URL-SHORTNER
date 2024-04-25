@@ -8,10 +8,69 @@ import { updateParams } from "@/types/types";
 function useEditForm(params: { id: string }) {
   const router = useRouter();
 
-  const updateBlog = async (data: updateParams) => {
+  // const updateBlog = async (data: updateParams) => {
+  //   try {
+  //     const res = await axios.put(
+  //       `http://localhost:3000/api/shortUrl/${data.id}`,
+  //       {
+  //         longUrl: data.longUrl,
+  //       }
+  //     );
+  //     return res.data;
+  //   } catch (error) {
+  //     console.error("Error updating URL:", error);
+  //     throw error;
+  //   }
+  // };
+
+  // const getBlogById = async (id: string) => {
+  //   try {
+  //     const res = await axios.get(`http://localhost:3000/api/shortUrl/${id}`);
+  //     return res.data;
+  //   } catch (error) {
+  //     console.error("Error fetching URL:", error);
+  //     throw error;
+  //   }
+  // };
+
+  // const urlRef = useRef<HTMLInputElement | null>(null);
+  // const [loading, setLoading] = useState(false);
+
+  // useEffect(() => {
+  //   toast.loading("Fetching URL 🚀", { id: "1" });
+  //   getBlogById(params.id)
+  //     .then((data) => {
+  //       if (urlRef.current) {
+  //         urlRef.current.value = data.post.longUrl;
+  //         toast.success("Fetching Completed", { id: "1" });
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       toast.error("Fetching Failed", { id: "1" });
+  //     });
+  // }, []);
+
+  // const handleUrl = async (e?: React.MouseEvent<HTMLButtonElement>) => {
+  //   if (e) {
+  //     e.preventDefault();
+  //   }
+
+  //   if (urlRef.current) {
+  //     toast.loading(" Sending Request 🚀", { id: "1" });
+  //     await updateBlog({
+  //       longUrl: urlRef.current?.value,
+  //       id: params.id,
+  //     });
+  //     toast.success("Your URL is Updated Successfully", { id: "1" });
+  //     router.push("/");
+  //   }
+  // };
+
+  // for main page
+  const updateMainUrl = async (data: updateParams) => {
     try {
       const res = await axios.put(
-        `http://localhost:3000/api/shortUrl/${data.id}`,
+        `http://localhost:3000/api/userUrl/${data.id}`,
         {
           longUrl: data.longUrl,
         }
@@ -23,9 +82,9 @@ function useEditForm(params: { id: string }) {
     }
   };
 
-  const getBlogById = async (id: string) => {
+  const getMainUrlById = async (id: string) => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/shortUrl/${id}`);
+      const res = await axios.get(`http://localhost:3000/api/userUrl/${id}`);
       return res.data;
     } catch (error) {
       console.error("Error fetching URL:", error);
@@ -33,15 +92,15 @@ function useEditForm(params: { id: string }) {
     }
   };
 
-  const urlRef = useRef<HTMLInputElement | null>(null);
-  const [loading, setLoading] = useState(false);
+  const mainUrlRef = useRef<HTMLInputElement | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     toast.loading("Fetching URL 🚀", { id: "1" });
-    getBlogById(params.id)
+    getMainUrlById(params.id)
       .then((data) => {
-        if (urlRef.current) {
-          urlRef.current.value = data.post.longUrl;
+        if (mainUrlRef.current) {
+          mainUrlRef.current.value = data.post.longUrl;
           toast.success("Fetching Completed", { id: "1" });
         }
       })
@@ -50,21 +109,23 @@ function useEditForm(params: { id: string }) {
       });
   }, []);
 
-  const handleUrl = async (e: any) => {
-    e.preventDefault();
+  const handleMainUrl = async (e?: React.MouseEvent<HTMLButtonElement>) => {
+    if (e) {
+      e.preventDefault();
+    }
 
-    if (urlRef.current) {
+    if (mainUrlRef.current) {
       toast.loading(" Sending Request 🚀", { id: "1" });
-      await updateBlog({
-        longUrl: urlRef.current?.value,
+      await updateMainUrl({
+        longUrl: mainUrlRef.current?.value,
         id: params.id,
       });
       toast.success("Your URL is Updated Successfully", { id: "1" });
-      router.push("/");
+      router.push("/mainPage");
     }
   };
 
-  return { urlRef, handleUrl, loading };
+  return { handleMainUrl, isLoading, mainUrlRef };
 }
 
 export default useEditForm;

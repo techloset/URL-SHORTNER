@@ -5,9 +5,8 @@ import edit from "@/public/assets/vectors/edit.svg";
 import dlt from "@/public/assets/vectors/bin.svg";
 import Link from "next/link";
 import useDelete from "@/hooks/useDelete";
-import useUserDelete from "@/hooks/useUserDelete";
 
-export default function Table({ params }: { params: { id: string } }) {
+export default function Table() {
   const { posts, handleDelete, handleClick } = useDelete();
 
   const redirectToLongUrl = async (longUrl: string, shortUrl: string) => {
@@ -67,9 +66,7 @@ export default function Table({ params }: { params: { id: string } }) {
                 className="w-[42px] h-[42px]"
                 onClick={() => handleDelete(post.id)}
               />
-              <Link href={`/editPage/${post.id}`}>
-                <Image src={edit} alt="" className="w-[42px] h-[42px]" />
-              </Link>
+              <Image src={edit} alt="" className="w-[42px] h-[42px]" />
             </td>
           </tr>
         ))}

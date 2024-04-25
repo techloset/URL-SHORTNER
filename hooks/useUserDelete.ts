@@ -83,5 +83,18 @@ export default function useUserDelete() {
     }
   };
 
-  return { posts, handleDelete, isLoading, handleClick };
+  const noPosts = posts.length === 0 && !isLoading;
+
+  const redirectToLongUrl = (longUrl: string) => {
+    window.open(longUrl, "_blank");
+  };
+
+  return {
+    posts,
+    handleDelete,
+    isLoading,
+    handleClick,
+    noPosts,
+    redirectToLongUrl,
+  };
 }

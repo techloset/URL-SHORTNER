@@ -6,8 +6,8 @@ import look from "@/public/assets/images/Look.png";
 import google from "@/public/assets/images/Google.png";
 import Link from "next/link";
 
-import InputFields from "@/components/inputField/Input";
-import FormButton from "@/components/formButton/FormButton";
+import InputFields from "@/components/formInput/Input";
+import FormButton from "@/components/customButton/FormButton";
 import useRegister from "@/hooks/useRegister";
 import useLoader from "@/hooks/useLoader";
 import Loader from "@/components/loader/Loader";
