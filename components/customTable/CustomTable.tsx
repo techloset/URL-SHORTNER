@@ -5,6 +5,7 @@ import edit from "@/public/assets/vectors/edit.svg";
 import dlt from "@/public/assets/vectors/bin.svg";
 import Link from "next/link";
 import useDelete from "@/hooks/useUrlDelete";
+import QRCode from "qrcode.react";
 
 export default function Table() {
   const { currentUrl, handleDelete, handleClick } = useDelete();
@@ -42,7 +43,8 @@ export default function Table() {
               </Link>
             </td>
             <td className="pt-[10px] px-[20px]">
-              <Image src={qr} alt="" />
+              <QRCode value={url.longUrl} size={30} />
+              {/* <Image src={qr} alt="" /> */}
             </td>
             <td
               onClick={() => {

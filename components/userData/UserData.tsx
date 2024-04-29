@@ -6,6 +6,7 @@ import dlt from "@/public/assets/vectors/bin.svg";
 import Link from "next/link";
 import useUserDelete from "@/hooks/useUserDelete";
 import { useSession } from "next-auth/react";
+import QRCode from "qrcode.react";
 
 export default function MainTable() {
   const { data, handleDelete, isLoading, noPosts, redirectToLongUrl } =
@@ -54,8 +55,9 @@ export default function MainTable() {
                   {item.longUrl.slice(0, 60)}
                 </Link>
               </td>
-              <td className="pt-[10px] px-[20px]">
-                <Image src={qr} alt="" />
+              <td className="pt-[10px] px-[20px] h-[25px]">
+                <QRCode value={item.longUrl} size={30} />
+                {/* <Image src={qr} alt="" /> */}
               </td>
               <td className="pt-[10px] px-[20px]">{item.clickCount}</td>
               <td className="pt-[10px]">
