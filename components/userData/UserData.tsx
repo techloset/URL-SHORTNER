@@ -9,8 +9,13 @@ import { useSession } from "next-auth/react";
 import QRCode from "qrcode.react";
 
 export default function MainTable() {
-  const { data, handleDelete, isLoading, noPosts, redirectToLongUrl } =
-    useUserDelete();
+  const {
+    data,
+    handleDelete,
+    isLoading,
+    redirectToLongUrl,
+    getUrlFromShortId,
+  } = useUserDelete();
   const { data: sessions } = useSession();
   const userEmail = sessions?.user?.email;
 
@@ -25,12 +30,6 @@ export default function MainTable() {
               Loading...
             </td>
           </tr>
-        ) : noPosts ? (
-          <tr>
-            <td colSpan={7} className="text-center py-4 text-white">
-              No URL's are shorten by the user till yet
-            </td>
-          </tr>
         ) : (
           userLinks.map((item, index) => (
             <tr
@@ -40,8 +39,10 @@ export default function MainTable() {
               <td scope="row" className="pt-[10px]">
                 <Link
                   href={""}
-                  className="text-whites"
-                  onClick={() => redirectToLongUrl(item.longUrl)}
+                  className="text-white"
+                  onClick={() => {
+                    getUrlFromShortId(item.shortUrl);
+                  }}
                 >
                   {"https://" + item.shortUrl}
                 </Link>
@@ -56,8 +57,7 @@ export default function MainTable() {
                 </Link>
               </td>
               <td className="pt-[10px] px-[20px] h-[25px]">
-                <QRCode value={item.longUrl} size={30} />
-                {/* <Image src={qr} alt="" /> */}
+                <QRCode value={item.longUrl} size={40} />
               </td>
               <td className="pt-[10px] px-[20px]">{item.clickCount}</td>
               <td className="pt-[10px]">

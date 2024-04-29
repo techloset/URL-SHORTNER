@@ -3,6 +3,7 @@ import { deleteCustomUrl } from "@/app/redux/slice/customUrl/deleteUrl";
 import { fetchCustomUrl } from "@/app/redux/slice/customUrl/fetchUrl";
 import { updateCustomUrl } from "@/app/redux/slice/customUrl/updateUrl";
 import { useAppDispatch, useAppSelector } from "@/app/redux/store";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -42,9 +43,21 @@ export default function useDelete() {
   const updateClick = async (shortUrl: string) => {
     try {
       setIsLoading(true);
-      await dispatch(updateCustomUrl(shortUrl));
+
+      const resUrl = await axios.put("/api/shortUrl", { shortUrl });
+
+      if (resUrl.status === 200 && resUrl.data && resUrl.data.message) {
+        toast.success("URL click's are updated successfully");
+      } else {
+        toast.error("Failed to update click count");
+      }
+
+      return {
+        message: resUrl.data.message,
+      };
     } catch (error) {
       console.error("Error updating click count:", error);
+      toast.error("Failed to update click count");
       throw error;
     } finally {
       setIsLoading(false);
@@ -77,5 +90,35 @@ export default function useDelete() {
     }
   };
 
-  return { currentUrl, handleDelete, isLoading, handleClick };
+  const getUrlFromShortId = async (shortUrl: any) => {
+    const filteredItem = currentUrl.find(
+      (item: any) => item.shortUrl === shortUrl
+    );
+
+    if (filteredItem) {
+      const longUrl = filteredItem.longUrl;
+
+      if (longUrl) {
+        try {
+          updateClick(shortUrl);
+          window.open(longUrl, "_blank");
+          dispatch(fetchCustomUrl());
+        } catch (error) {
+          console.error("Error redirecting to long URL:", error);
+        }
+      } else {
+        console.error("No longUrl found for the provided shortId");
+      }
+    } else {
+      console.error("No item found with the provided shortId");
+    }
+  };
+
+  return {
+    currentUrl,
+    handleDelete,
+    isLoading,
+    handleClick,
+    getUrlFromShortId,
+  };
 }

@@ -5,7 +5,7 @@ const FormButton: React.FC<ButtonProps> = ({ onClick, label, isLoading }) => {
     <div className="flex flex-row justify-center items-center">
       <button
         onClick={onClick}
-        className="w-[200px] bg-[#144EE3] h-[50px]  border rounded-[48px] border-[#144EE3] text-white font-semibold cursor-pointer px-6 py-2 relative"
+        className="w-[200px] bg-[#144EE3] hover:bg-[#181239] h-[50px]  border rounded-[48px] border-[#144EE3] text-white font-semibold cursor-pointer px-6 py-2 relative"
         disabled={isLoading}
       >
         {isLoading ? (

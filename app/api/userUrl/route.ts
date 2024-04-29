@@ -65,7 +65,7 @@ export const POST = async (req: NextRequest) => {
   }
 };
 
-export const PUT = async (req: NextRequest) => {
+export const PUT = async (req: NextRequest, shortUrl: any) => {
   try {
     const { shortUrl } = await req.json();
     console.log("Received shortUrl:", shortUrl);
@@ -89,7 +89,7 @@ export const PUT = async (req: NextRequest) => {
     console.log("Updated URL:", updatedUrl);
 
     return NextResponse.json({
-      message: "URL accessed successfully",
+      message: "URL count is updated successfully",
       longUrl: updatedUrl.longUrl,
       shortUrl: updatedUrl.shortUrl,
       clickCount: updatedUrl.clickCount,
@@ -97,6 +97,6 @@ export const PUT = async (req: NextRequest) => {
     });
   } catch (err) {
     console.error("Error accessing URL:", err);
-    return NextResponse.json({ message: "Something went wrong" });
+    return NextResponse.json({ message: "Somethi wrong" });
   }
 };

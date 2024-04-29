@@ -81,14 +81,14 @@ export const PUT = async (req: NextRequest) => {
     console.log("Updated URL:", updatedUrl);
 
     return NextResponse.json({
-      message: "URL accessed successfully",
+      message: "URL click updated successfully",
       longUrl: updatedUrl.longUrl,
       shortUrl: updatedUrl.shortUrl,
       clickCount: updatedUrl.clickCount,
       id: updatedUrl.id,
     });
   } catch (err) {
-    console.error("Error accessing URL:", err);
+    console.error("Error updating the URL clicks:", err);
     return NextResponse.json({ message: "Something went wrong" });
   }
 };

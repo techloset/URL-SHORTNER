@@ -8,7 +8,8 @@ import useDelete from "@/hooks/useUrlDelete";
 import QRCode from "qrcode.react";
 
 export default function Table() {
-  const { currentUrl, handleDelete, handleClick } = useDelete();
+  const { currentUrl, handleDelete, handleClick, getUrlFromShortId } =
+    useDelete();
 
   if (!currentUrl || !Array.isArray(currentUrl)) {
     return <div>Loading...</div>;
@@ -28,7 +29,9 @@ export default function Table() {
               <Link
                 href={""}
                 className="text-white "
-                onClick={() => redirectToLongUrl(url.longUrl, url.shortUrl)}
+                onClick={() => {
+                  getUrlFromShortId(url.shortUrl);
+                }}
               >
                 {"https://" + url.shortUrl}
               </Link>
@@ -43,8 +46,7 @@ export default function Table() {
               </Link>
             </td>
             <td className="pt-[10px] px-[20px]">
-              <QRCode value={url.longUrl} size={30} />
-              {/* <Image src={qr} alt="" /> */}
+              <QRCode value={url.longUrl} size={42} />
             </td>
             <td
               onClick={() => {

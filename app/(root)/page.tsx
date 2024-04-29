@@ -30,13 +30,13 @@ export default function TrialPage() {
             <div className="flex flex-row py-8 px-8 gap-2">
               <button
                 onClick={handleSignOut}
-                className="flex felx-row justify-between w-[123.9px] sm:w-[140px]  md:w-[123.9px] bg-[#343c4a] shadow-[#181e29] shadow-md  h-[50px]  border rounded-[48px] border-[#181329] text-white text-[13px] font-semibold cursor-pointer px-6 py-4 "
+                className="flex felx-row justify-between w-[123.9px] sm:w-[140px]  md:w-[123.9px] bg-[#343c4a] hover:bg-[#181e29] shadow-[#181e29] shadow-md  h-[50px]  border rounded-[48px] border-[#181329] text-white text-[13px] font-semibold cursor-pointer px-6 py-4 "
               >
                 Logout
                 <Image src={sign} alt="" />
               </button>
               <Link href={"/mainPage"}>
-                <button className="w-[140px] sm:w-[140px]  md:w-[150px] bg-[#144EE3] shadow-[#144ee3] shadow-md  h-[50px]  border rounded-[48px] border-[#144EE3] text-white text-[13px] font-semibold cursor-pointer px-6 py-4 ">
+                <button className="w-[140px] sm:w-[140px]  md:w-[150px] bg-[#144EE3] hover:bg-[#1d3557] shadow-[#144ee3] shadow-md  h-[50px]  border rounded-[48px] border-[#144EE3] text-white text-[13px] font-semibold cursor-pointer px-6 py-4 ">
                   Register Now{" "}
                 </button>
               </Link>
