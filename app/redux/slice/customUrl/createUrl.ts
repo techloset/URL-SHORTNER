@@ -21,7 +21,6 @@ export const createCustomUrl = createAsyncThunk(
 
       if (res.status === 200) {
         setLinkId(res.data.linkId);
-        // toast.success("Link is shortened successfully");
       }
       return res.data;
     } catch (error) {
