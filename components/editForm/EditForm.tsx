@@ -1,8 +1,7 @@
 "use client";
-import useEditForm from "@/hooks/useEdit";
-import FormButton from "../customButton/FormButton";
+import useEditForm from "@/hooks/useUrlEdit";
+import FormButton from "../customButton/CustomButton";
 import { CustomInput } from "../customInput/CustomInput";
-import { useRef } from "react";
 
 export default function EditForm({ params }: { params: { id: string } }) {
   const { handleMainUrl, isLoading, mainUrlRef } = useEditForm(params);

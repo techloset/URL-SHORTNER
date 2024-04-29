@@ -1,7 +1,7 @@
 "use client";
-import MainPage from "@/components/mainContent/MainPage";
+import MainPage from "@/components/mainContent/MainContent";
 import Toggler from "@/components/toggler/Toggler";
-import UserName from "@/components/profile/UserName";
+import UserName from "@/components/profile/Profile";
 import Image from "next/image";
 import Link from "next/link";
 import link from "@/public/assets/vectors/Linkly.svg";
@@ -9,7 +9,7 @@ import bell from "@/public/assets/images/Bell.png";
 import chart from "@/public/assets/vectors/chart.svg";
 import setting from "@/public/assets/vectors/cog.svg";
 import filter from "@/public/assets/vectors/filter.svg";
-import useDelete from "@/hooks/useDelete";
+import useDelete from "@/hooks/useUrlDelete";
 import Loader from "@/components/loader/Loader";
 
 export default function mainPage() {

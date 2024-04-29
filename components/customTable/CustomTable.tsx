@@ -4,10 +4,14 @@ import qr from "@/public/assets/vectors/QR.svg";
 import edit from "@/public/assets/vectors/edit.svg";
 import dlt from "@/public/assets/vectors/bin.svg";
 import Link from "next/link";
-import useDelete from "@/hooks/useDelete";
+import useDelete from "@/hooks/useUrlDelete";
 
 export default function Table() {
-  const { posts, handleDelete, handleClick } = useDelete();
+  const { currentUrl, handleDelete, handleClick } = useDelete();
+
+  if (!currentUrl || !Array.isArray(currentUrl)) {
+    return <div>Loading...</div>;
+  }
 
   const redirectToLongUrl = async (longUrl: string, shortUrl: string) => {
     window.open(longUrl, "_blank");
@@ -16,28 +20,25 @@ export default function Table() {
 
   return (
     <>
-      <tbody className=" text-white w-full ">
-        {posts.map((post: any) => (
-          <tr
-            key={post.id}
-            className="border-t-[1px] border-[#8d99ae] h-[60px]"
-          >
+      <tbody className="text-white w-full">
+        {currentUrl.map((url, index) => (
+          <tr key={index} className="border-t-[1px] border-[#8d99ae] h-[60px]">
             <td scope="row" className="pt-[10px]">
               <Link
                 href={""}
                 className="text-white "
-                onClick={() => redirectToLongUrl(post.longUrl, post.shortUrl)}
+                onClick={() => redirectToLongUrl(url.longUrl, url.shortUrl)}
               >
-                {"https://" + post.shortUrl}
+                {"https://" + url.shortUrl}
               </Link>
             </td>
             <td className="pt-[10px] flex flex-row mt-4 gap-2">
               <Link
                 href={""}
                 className="text-white "
-                onClick={() => redirectToLongUrl(post.longUrl, post.shortUrl)}
+                onClick={() => redirectToLongUrl(url.longUrl, url.shortUrl)}
               >
-                {post.longUrl.slice(0, 60)}
+                {url.longUrl.slice(0, 60)}
               </Link>
             </td>
             <td className="pt-[10px] px-[20px]">
@@ -45,11 +46,11 @@ export default function Table() {
             </td>
             <td
               onClick={() => {
-                handleClick(post.shortUrl);
+                handleClick(url.shortUrl);
               }}
               className="pt-[10px] px-[20px]"
             >
-              {post.clickCount}
+              {url.clickCount}
             </td>
             <td className="pt-[10px]">
               <div className="w-fit text-[12px] rounded-[4px] px-[20px] py-[3px] font-semibold text-[#13b036]">
@@ -57,14 +58,14 @@ export default function Table() {
               </div>
             </td>
             <td className="pt-[10px] ps-[20px]">
-              {new Date(post.date).toDateString()}
+              {new Date(url.date).toDateString()}
             </td>
             <td className="flex flex-row">
               <Image
                 src={dlt}
                 alt=""
                 className="w-[42px] h-[42px]"
-                onClick={() => handleDelete(post.id)}
+                onClick={() => handleDelete(url.id)}
               />
               <Image src={edit} alt="" className="w-[42px] h-[42px]" />
             </td>

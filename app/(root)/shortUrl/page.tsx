@@ -1,7 +1,7 @@
 "use client";
 import Loader from "@/components/loader/Loader";
-import Profile from "@/components/profile/UserName";
-import UrlShort from "@/components/linkShortener/ShortUrl";
+import Profile from "@/components/profile/Profile";
+import UrlShort from "@/components/linkShortener/LinkShortener";
 import useLoader from "@/hooks/useLoader";
 import Image from "next/image";
 import Link from "next/link";

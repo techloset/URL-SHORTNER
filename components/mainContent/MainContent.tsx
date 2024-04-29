@@ -1,4 +1,4 @@
-import MainTable from "../table/MainTable";
+import MainTable from "../userData/UserData";
 import TableHeadings from "../tableHeadings/TableHeadings";
 
 export default function MainPage() {

@@ -1,4 +1,4 @@
-import { authOptions } from "@/libs/AuthOptions";
+import { authOptions } from "@/libs/authOptions";
 import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
@@ -17,8 +17,11 @@ export async function main() {
 export const GET = async (req: NextRequest) => {
   try {
     await main();
-    const posts = await prisma.userLinks.findMany();
-    return NextResponse.json({ message: "Posts fetched successfully", posts });
+    const userUrl = await prisma.userLinks.findMany();
+    return NextResponse.json({
+      message: "Posts fetched successfully",
+      userUrl,
+    });
   } catch (error: any) {
     console.error("Error fetching posts:", error);
     return NextResponse.json({

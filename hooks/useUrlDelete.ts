@@ -1,36 +1,36 @@
 "use client";
+import { deleteCustomUrl } from "@/app/redux/slice/customUrl/deleteUrl";
+import { fetchCustomUrl } from "@/app/redux/slice/customUrl/fetchUrl";
+import { updateCustomUrl } from "@/app/redux/slice/customUrl/updateUrl";
 import { useAppDispatch, useAppSelector } from "@/app/redux/store";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function useDelete() {
-  const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const dispatch = useAppDispatch();
+  const currentUrl = useAppSelector((state) => state.trial.urls);
 
   useEffect(() => {
     fetchUrls();
   }, []);
 
-  const URL = "http://localhost:3000";
-
   async function fetchUrls() {
     try {
       setIsLoading(true);
-      const response = await axios.get(`${URL}/api/shortUrl`);
-      setPosts(response.data.posts);
+      await dispatch(fetchCustomUrl());
     } catch (error) {
       console.error("Error fetching URLs:", error);
     } finally {
       setIsLoading(false);
     }
   }
+
   const deleteUrl = async (id: string) => {
     try {
       setIsLoading(true);
-
-      const res = await axios.delete(`${URL}/api/shortUrl/${id}`);
-      return res.data;
+      await dispatch(deleteCustomUrl(id));
     } catch (error) {
       toast.error("Error deleting URL:");
       throw error;
@@ -42,13 +42,7 @@ export default function useDelete() {
   const updateClick = async (shortUrl: string) => {
     try {
       setIsLoading(true);
-
-      console.log("Data:", shortUrl);
-
-      const resUrl = await axios.put(`${URL}/api/shortUrl/${shortUrl}`);
-      console.log("Response:", resUrl);
-
-      return resUrl.data;
+      await dispatch(updateCustomUrl(shortUrl));
     } catch (error) {
       console.error("Error updating click count:", error);
       throw error;
@@ -83,5 +77,5 @@ export default function useDelete() {
     }
   };
 
-  return { posts, handleDelete, isLoading, handleClick };
+  return { currentUrl, handleDelete, isLoading, handleClick };
 }

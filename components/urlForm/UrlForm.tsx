@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import FormButton from "../customButton/FormButton";
+import FormButton from "../customButton/CustomButton";
 import { CustomInput, Input } from "../customInput/CustomInput";
 
 export default function UrlForm({ setLinkId }: { setLinkId: any }) {

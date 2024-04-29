@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Table from "../customTable/Table";
+import Table from "../customTable/CustomTable";
 
 import TableHeadings from "../tableHeadings/TableHeadings";
 

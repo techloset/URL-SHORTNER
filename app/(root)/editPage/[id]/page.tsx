@@ -1,5 +1,5 @@
 import EditForm from "@/components/editForm/EditForm";
-import Profile from "@/components/profile/UserName";
+import Profile from "@/components/profile/Profile";
 import look from "@/public/assets/images/Linkly.png";
 import button from "@/public/assets/vectors/Button.svg";
 import Image from "next/image";

@@ -48,9 +48,26 @@ export interface Url {
   date: number;
   clickCount: number;
   posts: string;
+  email: string;
 }
 
 export interface UrlState {
   urls: Url[];
   isLoading: boolean;
+  type: string;
+}
+export interface createdUrlState {
+  userUrls: createdUrl[];
+  isLoading: boolean;
+  type: string;
+}
+
+export interface createdUrl {
+  id: string;
+  longUrl: string;
+  shortUrl: string;
+  date: number;
+  clickCount: number;
+  posts: string;
+  email: string;
 }
