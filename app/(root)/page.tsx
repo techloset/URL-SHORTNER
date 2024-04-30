@@ -23,7 +23,7 @@ export default function TrialPage() {
         <Loader />
       ) : (
         <>
-          <div className="flex felx-row justify-between items-center flex-wrap">
+          <div className=" w-[1250px] flex felx-row justify-between items-center flex-wrap">
             <div className="py-8 px-6 h-[120px]">
               <Image className="h-[35px]" src={link} alt="" />
             </div>
@@ -66,7 +66,7 @@ export default function TrialPage() {
             </div>
           </div>
           <Toggler />
-          <div className="text-white text-center py-12 font-extralight">
+          <div className="w-[1250px] text-white text-center py-12 font-extralight">
             You can create{" "}
             <span style={{ color: "#eb568e", fontWeight: "bold" }}>05</span>{" "}
             more links. <Link href={"/shortUrl"}>Register Now</Link> to enjoy
