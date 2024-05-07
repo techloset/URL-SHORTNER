@@ -33,7 +33,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(newUser);
   } catch (err: any) {
-    console.log("REGISTER_ERR: " + err);
+    console.log("SOMETHING WENT WRONG: " + err);
     return new NextResponse(err, { status: 500 });
   }
 }
